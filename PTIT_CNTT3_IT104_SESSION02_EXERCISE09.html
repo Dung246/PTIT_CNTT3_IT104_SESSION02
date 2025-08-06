@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let student = {
+           name: "Dev",
+           age: 20,
+           listMonhoc: [
+            { subject: "Math", score: 9 },
+            { subject: "English", score: 7.5 },
+            { subject: "Physics", score: 6 },
+            { subject: "Literature", score: 8.5 },
+            ],
+        };
+
+        function getAvgStudents(avgScore) {
+            if (avgScore >= 8.5) return "Học sinh giỏi";
+            if (avgScore >= 7) return "Học sinh khá";
+            if (avgScore >= 5) return "Học sinh trung bình";
+            return "Học sinh yếu";
+        }
+
+        function bestAndWorstSubject(subjects) {
+            let best = subjects[0];
+            let worst = subjects[0];
+
+        for (let subject of subjects) {
+            if (subject.score > best.score) best = subject;
+            if (subject.score < worst.score) worst = subject;
+       }
+        return { best, worst };
+       }
+
+        function printStudentSummary({ name, age, avg, rank, best, worst }) {
+            console.log(`${name} is ${age} years old.`);
+            console.log(`Average score: ${avg} → ${rank}`);
+            console.log(`Best subject: ${best.subject} (${best.score})`);
+            console.log(`Weakest subject: ${worst.subject} (${worst.score})`);
+      }
+
+        function getStudentSummary(student) {
+           let { name, age, listMonhoc } = student;
+           let total = listMonhoc.reduce((sum, item) => sum + item.score, 0);
+           let avg = +(total / listMonhoc.length).toFixed(2);
+           let rank = getAvgStudents(avg);
+           let { best, worst } = bestAndWorstSubject(listMonhoc);
+           printStudentSummary({ name, age, avg, rank, best, worst });
+      }
+        getStudentSummary(student);
+    </script>
+</body>
+</html>
